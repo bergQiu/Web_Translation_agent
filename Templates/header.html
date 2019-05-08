@@ -1,0 +1,45 @@
+{%  load staticfiles %}
+<div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navba-header">
+            <!-- <a class="navbar-brand"><img src="{% static 'img/Log.png'%}" width="30px"></a> -->
+            <a class="navbar-brand"><p>FYou</p></a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav navbar-left" role="navigation" >
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'home' %}">網站首頁</a></li>
+                <li><a href="{% url 'mytest:translate' %}">翻译</a></li>
+                {% else %}
+                <li><a>Plase login first</a></li>
+                {% endif %}
+            </ul>
+            <ul class="nav navbar-nav navbar-right" style="margin-right:10px" >
+                {% if user.is_authenticated %}
+                <li style="margin-top:1px">
+                    <div class="dropdown" style="margin-top:8px">
+                        <a href="#" class="btn btn-default dropdown-toggle " data-toggle="dropdown"   style="color:#777;Border:none;background-color:#f8f8f8">{{user.username}}<span class="caret"></span></a>
+                        <!-- <button class='btn dropdown-toggle' type="button" id="dropdownMenu" data-toggle="dropdown" outline = "none">
+                        {{user.username}}<span class="caret"></span>
+                        </button> -->
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'account:password_change' %}">Change PW</a></li>
+                            <li><a href="{% url 'account:myself' %}">Mself</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <!-- 返回用戶的登錄狀態 -->
+                <!-- <li><a href="#">{{user.username}}</a></li> -->
+                <!-- url由應用名稱+URL名稱 組成 -->
+                <li><a href="{% url 'account:user_logout' %}">Logout</a></li>
+                {% else %}
+                <li><a href="{% url 'account:user_login' %}">Login</a></li>
+                {% endif %}
+                <li><a href="{% url 'account:user_register' %}">Sing up</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<script src="{% static 'js/jquery.js'%}"></script>
+<script src="{% static 'js/bootstrap.js' %}"></script>
